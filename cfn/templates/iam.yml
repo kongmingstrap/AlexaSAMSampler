@@ -1,0 +1,43 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: IAM Stack
+
+Resources:
+  SAMDeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: sam-deploy-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: cloudformation.amazonaws.com
+            Action: sts:AssumeRole
+      Path: !Sub /${AWS::StackName}/
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+
+  MyFactSkillRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: my-fact-skill-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Path: !Sub /${AWS::StackName}/
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+Outputs:
+  SAMDeployRoleArn:
+    Value: !GetAtt SAMDeployRole.Arn
+
+  MyFactSkillRoleArn:
+    Value: !GetAtt MyFactSkillRole.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-MyFactSkillRoleArn
