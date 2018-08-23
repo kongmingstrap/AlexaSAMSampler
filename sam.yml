@@ -1,0 +1,19 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: Sempler Serverless Application Model
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  MyFactSkillFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: MyFactSkill
+      CodeUri: src/handlers/MyFactSkill
+      Handler: index.handler
+      Runtime: nodejs6.10
+      Timeout: 10
+      MemorySize: 128
+      Role: !ImportValue alexa-sampler-iam-MyFactSkillRoleArn
+      Events:
+        Alexa:
+          Type: AlexaSkill
