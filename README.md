@@ -3,7 +3,7 @@ AlexaSAMSampler
 
 Deploy Alexa Skill with [AWS SAM](https://github.com/awslabs/serverless-application-model)
 
-# Reference
+# eference
 - [Alexaスキル開発トレーニングシリーズ 第1回 初めてのスキル開発](https://developer.amazon.com/ja/blogs/alexa/post/6e716e5c-55b0-445b-b936-9cfac4712e7b/training-1)
 
 # Requirements
@@ -59,9 +59,17 @@ $ ./run.sh -t s3.yml
 $ ./run.sh -t iam.yml
 ```
 
-## 2. Building AWS SAM
+## 3. Building AWS SAM
 
-```shell
+### Build
+
+```bash
 $ cd AlexaSAMSampler
+$ make build
+```
+
+### Deploy
+
+```bash
 $ make deploy
 ```
